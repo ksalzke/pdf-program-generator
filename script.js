@@ -34,26 +34,31 @@ for (let i = 0; i < concertData.performances.length; i++) {
 
   let yAfterComposer = doc.y;
 
-  //set y coordinates for 2nd row based on longest part of 1st row
-  currentYCoord = Math.max(yAfterStudent, yAfterPiece, yAfterComposer);
-
   doc.x = margin;
   doc.y = yAfterStudent;
   doc.fontSize(8).text("Accomp: " + performance.accompanist, {
     width: columnWidth
   });
+  let yAfterAccompanist = doc.y;
+
   doc.x = margin + columnWidth;
   doc.y = yAfterPiece;
   doc.text(performance.instrument, {
     align: "center",
     width: columnWidth
   });
+  let yAfterInstrument = doc.y;
+
   doc.x = margin + columnWidth * 2;
   doc.y = yAfterComposer;
   doc.text("Arr: " + performance.arranger, {
     align: "right",
     width: columnWidth
   });
+  let yAfterArranger = doc.y;
+
+  //set y coordinates for next row based on longest part of this row
+  doc.y = Math.max(yAfterAccompanist, yAfterInstrument, yAfterArranger);
   doc.moveDown(3);
 }
 

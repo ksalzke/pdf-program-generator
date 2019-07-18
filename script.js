@@ -17,20 +17,28 @@ for (let i = 0; i < concertData.performances.length; i++) {
   doc.fontSize(11).text(performance.student, {
     width: columnWidth
   });
+  let yAfterStudent = doc.moveDown().y;
   doc.x = margin + columnWidth;
   doc.y = currentYCoord;
   doc.text(performance.piece, {
     align: "center",
     width: columnWidth
   });
+  let yAfterPiece = doc.moveDown().y;
   doc.x = margin + columnWidth * 2;
   doc.y = currentYCoord;
   doc.text(performance.composer, {
     align: "right",
     width: columnWidth
   });
+
+  let yAfterComposer = doc.moveDown().y;
+
+  //set y coordinates for 2nd row based on longest part of 1st row
+  currentYCoord = Math.max(yAfterStudent, yAfterPiece, yAfterComposer);
+
   doc.x = margin;
-  // doc.y = currentYCoord;
+  doc.y = currentYCoord;
   doc.fontSize(8).text("Accomp: " + performance.accompanist, {
     width: columnWidth
   });

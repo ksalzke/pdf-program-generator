@@ -15,7 +15,8 @@ var saveData = (function() {
     var url = window.URL.createObjectURL(blob);
     a.href = url;
     a.download = fileName;
-    a.click();
+    // a.click();
+    $("iframe").prop("src", url);
     window.URL.revokeObjectURL(url);
   };
 })();

@@ -1,7 +1,7 @@
 var doc = new PDFDocument();
 var stream = doc.pipe(blobStream());
 
-doc.text("Hello World");
+doc.text(concertData.date);
 
 // end and display the document in the iframe to the right
 doc.end();

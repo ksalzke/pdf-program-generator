@@ -11,30 +11,37 @@ let columnWidth = (doc.page.width - margin * 2) / 3;
 for (let i = 0; i < concertData.performances.length; i++) {
   let performance = concertData.performances[i];
 
+  var currentYCoord = doc.y;
+
   doc.x = margin;
   doc.fontSize(11).text(performance.student, {
     width: columnWidth
   });
   doc.x = margin + columnWidth;
-  doc.moveUp().text(performance.piece, {
+  doc.y = currentYCoord;
+  doc.text(performance.piece, {
     align: "center",
     width: columnWidth
   });
   doc.x = margin + columnWidth * 2;
-  doc.moveUp().text(performance.composer, {
+  doc.y = currentYCoord;
+  doc.text(performance.composer, {
     align: "right",
     width: columnWidth
   });
   doc.x = margin;
+  // doc.y = currentYCoord;
   doc.fontSize(8).text("Accomp: " + performance.accompanist, {
     width: columnWidth
   });
   doc.x = margin + columnWidth;
+  // doc.y = currentYCoord;
   doc.moveUp().text(performance.instrument, {
     align: "center",
     width: columnWidth
   });
   doc.x = margin + columnWidth * 2;
+  // doc.y = currentYCoord;
   doc.moveUp().text("Arr: " + performance.arranger, {
     align: "right",
     width: columnWidth

@@ -6,7 +6,7 @@ var stream = doc.pipe(blobStream());
 
 for (let i = 0; i < concertData.performances.length; i++) {
   let performance = concertData.performances[i];
-  doc.fontSize(12).text(performance.student);
+  doc.fontSize(11).text(performance.student);
   doc.moveUp().text(performance.piece, {
     align: "center"
   });

@@ -1,24 +1,43 @@
+let margin = 25;
+
 var doc = new PDFDocument({
   size: "A5",
-  margin: 25
+  margin: margin
 });
 var stream = doc.pipe(blobStream());
 
+let columnWidth = (doc.page.width - margin * 2) / 3;
+
 for (let i = 0; i < concertData.performances.length; i++) {
   let performance = concertData.performances[i];
-  doc.fontSize(11).text(performance.student);
+
+  doc.x = margin;
+  doc.fontSize(11).text(performance.student, {
+    width: columnWidth
+  });
+  doc.x = margin + columnWidth;
   doc.moveUp().text(performance.piece, {
-    align: "center"
+    align: "center",
+    width: columnWidth
   });
+  doc.x = margin + columnWidth * 2;
   doc.moveUp().text(performance.composer, {
-    align: "right"
+    align: "right",
+    width: columnWidth
   });
-  doc.fontSize(8).text("Accomp: " + performance.accompanist);
+  doc.x = margin;
+  doc.fontSize(8).text("Accomp: " + performance.accompanist, {
+    width: columnWidth
+  });
+  doc.x = margin + columnWidth;
   doc.moveUp().text(performance.instrument, {
-    align: "center"
+    align: "center",
+    width: columnWidth
   });
+  doc.x = margin + columnWidth * 2;
   doc.moveUp().text("Arr: " + performance.arranger, {
-    align: "right"
+    align: "right",
+    width: columnWidth
   });
   doc.moveDown(3);
 }

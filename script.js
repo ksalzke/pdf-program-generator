@@ -1,7 +1,23 @@
-var doc = new PDFDocument();
+var doc = new PDFDocument({
+  size: "A5",
+  margin: 25
+});
 var stream = doc.pipe(blobStream());
 
-doc.text(concertData.date);
+doc.text(concertData.performances[0].student);
+doc.moveUp().text(concertData.performances[0].piece, {
+  align: "center"
+});
+doc.moveUp().text(concertData.performances[0].composer, {
+  align: "right"
+});
+doc.fontSize(8).text("Accomp: " + concertData.performances[0].accompanist);
+doc.moveUp().text(concertData.performances[0].instrument, {
+  align: "center"
+});
+doc.moveUp().text("Arr: " + concertData.performances[0].arranger, {
+  align: "right"
+});
 
 // end and display the document in the iframe to the right
 doc.end();

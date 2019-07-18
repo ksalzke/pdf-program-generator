@@ -17,14 +17,14 @@ for (let i = 0; i < concertData.performances.length; i++) {
   doc.fontSize(11).text(performance.student, {
     width: columnWidth
   });
-  let yAfterStudent = doc.moveDown().y;
+  let yAfterStudent = doc.y;
   doc.x = margin + columnWidth;
   doc.y = currentYCoord;
   doc.text(performance.piece, {
     align: "center",
     width: columnWidth
   });
-  let yAfterPiece = doc.moveDown().y;
+  let yAfterPiece = doc.y;
   doc.x = margin + columnWidth * 2;
   doc.y = currentYCoord;
   doc.text(performance.composer, {
@@ -32,25 +32,25 @@ for (let i = 0; i < concertData.performances.length; i++) {
     width: columnWidth
   });
 
-  let yAfterComposer = doc.moveDown().y;
+  let yAfterComposer = doc.y;
 
   //set y coordinates for 2nd row based on longest part of 1st row
   currentYCoord = Math.max(yAfterStudent, yAfterPiece, yAfterComposer);
 
   doc.x = margin;
-  doc.y = currentYCoord;
+  doc.y = yAfterStudent;
   doc.fontSize(8).text("Accomp: " + performance.accompanist, {
     width: columnWidth
   });
   doc.x = margin + columnWidth;
-  // doc.y = currentYCoord;
-  doc.moveUp().text(performance.instrument, {
+  doc.y = yAfterPiece;
+  doc.text(performance.instrument, {
     align: "center",
     width: columnWidth
   });
   doc.x = margin + columnWidth * 2;
-  // doc.y = currentYCoord;
-  doc.moveUp().text("Arr: " + performance.arranger, {
+  doc.y = yAfterComposer;
+  doc.text("Arr: " + performance.arranger, {
     align: "right",
     width: columnWidth
   });

@@ -4,20 +4,24 @@ var doc = new PDFDocument({
 });
 var stream = doc.pipe(blobStream());
 
-doc.text(concertData.performances[0].student);
-doc.moveUp().text(concertData.performances[0].piece, {
-  align: "center"
-});
-doc.moveUp().text(concertData.performances[0].composer, {
-  align: "right"
-});
-doc.fontSize(8).text("Accomp: " + concertData.performances[0].accompanist);
-doc.moveUp().text(concertData.performances[0].instrument, {
-  align: "center"
-});
-doc.moveUp().text("Arr: " + concertData.performances[0].arranger, {
-  align: "right"
-});
+for (let i = 0; i < concertData.performances.length; i++) {
+  let performance = concertData.performances[i];
+  doc.fontSize(12).text(performance.student);
+  doc.moveUp().text(performance.piece, {
+    align: "center"
+  });
+  doc.moveUp().text(performance.composer, {
+    align: "right"
+  });
+  doc.fontSize(8).text("Accomp: " + performance.accompanist);
+  doc.moveUp().text(performance.instrument, {
+    align: "center"
+  });
+  doc.moveUp().text("Arr: " + performance.arranger, {
+    align: "right"
+  });
+  doc.moveDown(3);
+}
 
 // end and display the document in the iframe to the right
 doc.end();
